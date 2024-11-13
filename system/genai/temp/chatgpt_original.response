@@ -1,0 +1,56 @@
+{
+    "models": [
+        {
+            "classname": "Wood",
+            "code": "class Wood(Base):\n    \"\"\"description: Stores information about the types of wood.\"\"\"\n    __tablename__ = 'wood'\n\n    id = Column(Integer, primary_key=True, autoincrement=True)\n    name = Column(String, nullable=False)\n    type = Column(String)\n    origin = Column(String)\n    cost = Column(Integer)",
+            "description": "Stores information about the types of wood.",
+            "name": "Wood"
+        },
+        {
+            "classname": "Inventory",
+            "code": "class Inventory(Base):\n    \"\"\"description: Current wooden inventory in the warehouse.\"\"\"\n    __tablename__ = 'inventory'\n\n    id = Column(Integer, primary_key=True, autoincrement=True)\n    wood_id = Column(Integer, ForeignKey('wood.id'))\n    quantity = Column(Integer, nullable=False)\n    arrived_on = Column(DateTime)\n    expected_date = Column(DateTime)\n    cost = Column(Integer)\n    total_value = Column(Integer, nullable=False)  # Derived as quantity * cost",
+            "description": "Current wooden inventory in the warehouse.",
+            "name": "Inventory"
+        },
+        {
+            "classname": "Supplier",
+            "code": "class Supplier(Base):\n    \"\"\"description: Information on wood suppliers.\"\"\"\n    __tablename__ = 'supplier'\n\n    id = Column(Integer, primary_key=True, autoincrement=True)\n    name = Column(String, nullable=False)\n    country = Column(String)\n    contact_number = Column(String)",
+            "description": "Information on wood suppliers.",
+            "name": "Supplier"
+        },
+        {
+            "classname": "SupplierWood",
+            "code": "class SupplierWood(Base):\n    \"\"\"description: Link table between Supplier and Wood; details which Supplier provides which Wood.\"\"\"\n    __tablename__ = 'supplier_wood'\n\n    id = Column(Integer, primary_key=True, autoincrement=True)\n    supplier_id = Column(Integer, ForeignKey('supplier.id'), nullable=False)\n    wood_id = Column(Integer, ForeignKey('wood.id'), nullable=False)",
+            "description": "Link table between Supplier and Wood; details which Supplier provides which Wood.",
+            "name": "SupplierWood"
+        },
+        {
+            "classname": "Store",
+            "code": "class Store(Base):\n    \"\"\"description: Information on stores for wooden goods.\"\"\"\n    __tablename__ = 'store'\n\n    id = Column(Integer, primary_key=True, autoincrement=True)\n    name = Column(String, nullable=False)\n    location = Column(String)\n    manager_name = Column(String)",
+            "description": "Information on stores for wooden goods.",
+            "name": "Store"
+        },
+        {
+            "classname": "StoreInventory",
+            "code": "class StoreInventory(Base):\n    \"\"\"description: Wooden inventory held by each store.\"\"\"\n    __tablename__ = 'store_inventory'\n\n    id = Column(Integer, primary_key=True, autoincrement=True)\n    store_id = Column(Integer, ForeignKey('store.id'), nullable=False)\n    wood_id = Column(Integer, ForeignKey('wood.id'), nullable=False)\n    quantity = Column(Integer, nullable=False)\n    total_value = Column(Integer, nullable=False)  # Derived as StoreInventory.quantity * Inventory.cost",
+            "description": "Wooden inventory held by each store.",
+            "name": "StoreInventory"
+        }
+    ],
+    "rules": [
+        {
+            "name": "Inventory Total Value Calculation",
+            "description": "Calculate the total value for each inventory record.",
+            "use_case": "To keep track of the potential revenue from the stored wood.",
+            "code": "Rule.formula(derive=Inventory.total_value, as_expression=lambda row: row.quantity * row.cost)"
+        },
+        {
+            "name": "Store Inventory Total Value Calculation",
+            "description": "Calculate the total value for store inventory.",
+            "use_case": "To evaluate store-specific wood inventory worth.",
+            "code": "Rule.formula(derive=StoreInventory.total_value, as_expression=lambda row: row.quantity * row.inventory.cost)"
+        }
+    ],
+    "test_data": "from datetime import date\n\n# Test data for Wood\neopine = Wood(name='Neo Pine', type='Softwood', origin='Norway', cost=200)\noak = Wood(name='Oak', type='Hardwood', origin='USA', cost=350)\nmaple = Wood(name='Maple', type='Hardwood', origin='Canada', cost=300)\nmahogany = Wood(name='Mahogany', type='Hardwood', origin='Brazil', cost=400)\n\n# Test data for Inventory\ninventory1 = Inventory(wood_id=1, quantity=500, arrived_on=date(2023, 1, 15), expected_date=date(2023, 2, 15), cost=200, total_value=100000)\ninventory2 = Inventory(wood_id=2, quantity=300, arrived_on=date(2023, 1, 20), expected_date=date(2023, 2, 10), cost=350, total_value=105000)\ninventory3 = Inventory(wood_id=3, quantity=200, arrived_on=date(2023, 1, 25), expected_date=date(2023, 2, 5), cost=300, total_value=60000)\ninventory4 = Inventory(wood_id=4, quantity=400, arrived_on=date(2023, 1, 30), expected_date=date(2023, 2, 1), cost=400, total_value=160000)\n\n# Test data for Supplier\nsupplier1 = Supplier(name='Green Timber', country='Norway', contact_number='123-456-7890')\nsupplier2 = Supplier(name='Timber Masters', country='USA', contact_number='234-567-8901')\nsupplier3 = Supplier(name='Maple Leaf Lumber', country='Canada', contact_number='345-678-9012')\nsupplier4 = Supplier(name='Amazon Woods', country='Brazil', contact_number='456-789-0123')\n\n# Test data for SupplierWood\nsupplierwood1 = SupplierWood(supplier_id=1, wood_id=1)\nsupplierwood2 = SupplierWood(supplier_id=2, wood_id=2)\nsupplierwood3 = SupplierWood(supplier_id=3, wood_id=3)\nsupplierwood4 = SupplierWood(supplier_id=4, wood_id=4)\n\n# Test data for Store\nstore1 = Store(name='Wooden Wonders', location='City Center', manager_name='Alice Smith')\nstore2 = Store(name='Timber Town', location='Uptown', manager_name='Bob Johnson')\nstore3 = Store(name='Lumber Land', location='Downtown', manager_name='Charlie Brown')\nstore4 = Store(name='Wood Works', location='Suburb', manager_name='Diana Prince')\n\n# Test data for StoreInventory\nstoreinventory1 = StoreInventory(store_id=1, wood_id=1, quantity=50, total_value=10000)\nstoreinventory2 = StoreInventory(store_id=2, wood_id=2, quantity=30, total_value=10500)\nstoreinventory3 = StoreInventory(store_id=3, wood_id=3, quantity=20, total_value=6000)\nstoreinventory4 = StoreInventory(store_id=4, wood_id=4, quantity=40, total_value=16000)",
+    "name": "WoodInventoryManagement"
+}

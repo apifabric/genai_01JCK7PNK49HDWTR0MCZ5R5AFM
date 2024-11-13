@@ -1,0 +1,53 @@
+<o-form-layout-manager attr="StoreInventory" mode="tab" title="STOREINVENTORY">
+    <div fxFill fxLayout="column" fxLayoutAlign="start">
+        <o-table 
+            attr="StoreInventoryTable" 
+            service="StoreInventory" 
+            entity="StoreInventory" 
+            title="STOREINVENTORY"
+            keys="id"
+            columns="id;store_id;wood_id;quantity;total_value" 
+            header-actions="R;D"
+            visible-columns="id;store_id;wood_id;quantity;total_value"  
+            sort-columns="id" 
+            query-rows="20" 
+            quick-filter="yes"
+            row-height="medium" 
+            select-all-checkbox="true" 
+            pageable="yes"  
+            auto-adjust="true" 
+            virtual-scroll="yes" 
+            edition-mode="dblclick"
+            horizontal-scroll="yes"
+            show-title="yes"
+            export-button="yes">
+            
+            <o-table-column #id attr="id" title=" id*" type="integer" editable="no" required="no" content-align="center"></o-table-column>
+            
+            <o-table-column attr="store_id" title="store_id">
+    <o-table-cell-renderer-service attr="store_id" 
+        service="Store" entity="StoreType" columns="id;name"
+        parent-keys="id:store_id"
+        value-column="name" keys="store_id"
+        visible-columns="name" separator=" - " width="680px">
+    </o-table-cell-renderer-service>
+</o-table-column>
+            
+            <o-table-column attr="wood_id" title="wood_id">
+    <o-table-cell-renderer-service attr="wood_id" 
+        service="Wood" entity="WoodType" columns="id;name"
+        parent-keys="id:wood_id"
+        value-column="name" keys="wood_id"
+        visible-columns="name" separator=" - " width="680px">
+    </o-table-cell-renderer-service>
+</o-table-column>
+            
+            <o-table-column #quantity attr="quantity" title="quantity" type="integer" editable="no" required="yes" content-align="center"></o-table-column>
+            
+            <o-table-column #total_value attr="total_value" title="total_value" type="integer" editable="no" required="yes" content-align="center"></o-table-column>
+            
+            <o-table-context-menu></o-table-context-menu>
+            <o-table-paginator page-size-options="24;48;96"></o-table-paginator>
+        </o-table>
+    </div>
+</o-form-layout-manager>

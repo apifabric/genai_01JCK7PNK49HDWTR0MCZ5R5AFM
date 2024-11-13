@@ -1,0 +1,295 @@
+about:
+  date: November 13, 2024 17:04:26
+  recent_changes: works with modified safrs-react-admin
+  version: 0.0.0
+api_root: '{http_type}://{swagger_host}:{port}/{api}'
+authentication: '{system-default}'
+entities:
+  Inventory:
+    columns:
+    - label: ' id*'
+      name: id
+      search: true
+      sort: true
+      template: integer
+      type: INTEGER
+    - name: wood_id
+      template: integer
+      type: INTEGER
+    - name: quantity
+      required: true
+      template: integer
+      type: INTEGER
+    - name: arrived_on
+      type: DATETIME
+    - name: expected_date
+      type: DATETIME
+    - name: cost
+      template: integer
+      type: INTEGER
+    - name: total_value
+      required: true
+      template: integer
+      type: INTEGER
+    description: Current wooden inventory in the warehouse.
+    detail_template: detail_template.html
+    exclude: 'false'
+    favorite: id
+    hidden: {}
+    home_template: home_template.html
+    info_list: Current wooden inventory in the warehouse.
+    label: Inventory
+    mode: tab
+    new_template: new_template.html
+    primary_key:
+    - id
+    tab_groups:
+    - direction: toone
+      fks:
+      - wood_id
+      name: wood
+      resource: Wood
+    type: Inventory
+  Store:
+    columns:
+    - label: ' name*'
+      name: name
+      required: true
+      search: true
+      sort: true
+      template: text
+      type: VARCHAR
+    - name: location
+      template: text
+      type: VARCHAR
+    - name: manager_name
+      template: text
+      type: VARCHAR
+    - name: id
+      template: integer
+      type: INTEGER
+    description: Information on stores for wooden goods.
+    detail_template: detail_template.html
+    exclude: 'false'
+    favorite: name
+    hidden: {}
+    home_template: home_template.html
+    info_list: Information on stores for wooden goods.
+    label: Store
+    mode: tab
+    new_template: new_template.html
+    primary_key:
+    - id
+    tab_groups:
+    - direction: tomany
+      fks:
+      - store_id
+      name: StoreInventoryList
+      resource: StoreInventory
+    type: Store
+  StoreInventory:
+    columns:
+    - label: ' id*'
+      name: id
+      search: true
+      sort: true
+      template: integer
+      type: INTEGER
+    - name: store_id
+      required: true
+      template: integer
+      type: INTEGER
+    - name: wood_id
+      required: true
+      template: integer
+      type: INTEGER
+    - name: quantity
+      required: true
+      template: integer
+      type: INTEGER
+    - name: total_value
+      required: true
+      template: integer
+      type: INTEGER
+    description: Wooden inventory held by each store.
+    detail_template: detail_template.html
+    exclude: 'false'
+    favorite: id
+    hidden: {}
+    home_template: home_template.html
+    info_list: Wooden inventory held by each store.
+    label: StoreInventory
+    mode: tab
+    new_template: new_template.html
+    primary_key:
+    - id
+    tab_groups:
+    - direction: toone
+      fks:
+      - store_id
+      name: store
+      resource: Store
+    - direction: toone
+      fks:
+      - wood_id
+      name: wood
+      resource: Wood
+    type: StoreInventory
+  Supplier:
+    columns:
+    - label: ' name*'
+      name: name
+      required: true
+      search: true
+      sort: true
+      template: text
+      type: VARCHAR
+    - name: country
+      template: text
+      type: VARCHAR
+    - name: contact_number
+      template: text
+      type: VARCHAR
+    - name: id
+      template: integer
+      type: INTEGER
+    description: Information on wood suppliers.
+    detail_template: detail_template.html
+    exclude: 'false'
+    favorite: name
+    hidden: {}
+    home_template: home_template.html
+    info_list: Information on wood suppliers.
+    label: Supplier
+    mode: tab
+    new_template: new_template.html
+    primary_key:
+    - id
+    tab_groups:
+    - direction: tomany
+      fks:
+      - supplier_id
+      name: SupplierWoodList
+      resource: SupplierWood
+    type: Supplier
+  SupplierWood:
+    columns:
+    - label: ' id*'
+      name: id
+      search: true
+      sort: true
+      template: integer
+      type: INTEGER
+    - name: supplier_id
+      required: true
+      template: integer
+      type: INTEGER
+    - name: wood_id
+      required: true
+      template: integer
+      type: INTEGER
+    description: Link table between Supplier and Wood; details which Supplier provides
+      which Wood.
+    detail_template: detail_template.html
+    exclude: 'false'
+    favorite: id
+    hidden: {}
+    home_template: home_template.html
+    info_list: Link table between Supplier and Wood; details which Supplier provides
+      which Wood.
+    label: SupplierWood
+    mode: tab
+    new_template: new_template.html
+    primary_key:
+    - id
+    tab_groups:
+    - direction: toone
+      fks:
+      - supplier_id
+      name: supplier
+      resource: Supplier
+    - direction: toone
+      fks:
+      - wood_id
+      name: wood
+      resource: Wood
+    type: SupplierWood
+  Wood:
+    columns:
+    - label: ' name*'
+      name: name
+      required: true
+      search: true
+      sort: true
+      template: text
+      type: VARCHAR
+    - name: Type
+      template: text
+      type: VARCHAR
+    - name: origin
+      template: text
+      type: VARCHAR
+    - name: cost
+      template: integer
+      type: INTEGER
+    - name: id
+      template: integer
+      type: INTEGER
+    description: Stores information about the types of wood.
+    detail_template: detail_template.html
+    exclude: 'false'
+    favorite: name
+    hidden: {}
+    home_template: home_template.html
+    info_list: Stores information about the types of wood.
+    label: Wood
+    mode: tab
+    new_template: new_template.html
+    primary_key:
+    - id
+    tab_groups:
+    - direction: tomany
+      fks:
+      - wood_id
+      name: InventoryList
+      resource: Inventory
+    - direction: tomany
+      fks:
+      - wood_id
+      name: StoreInventoryList
+      resource: StoreInventory
+    - direction: tomany
+      fks:
+      - wood_id
+      name: SupplierWoodList
+      resource: SupplierWood
+    type: Wood
+settings:
+  HomeJS: /admin-app/home.js
+  max_list_columns: 8
+  style_guide:
+    applicationLocales:
+    - en
+    - es
+    currency_symbol: $
+    currency_symbol_position: left
+    date_format: LL
+    decimal_max: '1000000000'
+    decimal_min: '0'
+    decimal_separator: .
+    edit_on_mode: dblclick
+    exclude_listpicker: false
+    include_translation: false
+    keycloak_client_id: alsclient
+    keycloak_realm: kcals
+    keycloak_url: http://localhost:8080
+    locale: en
+    max_decimal_digits: '4'
+    min_decimal_digits: '2'
+    mode: tab
+    pick_style: list
+    serviceType: OntimizeEE
+    startSessionPath: /auth/login
+    style: light
+    thousand_separator: ','
+    use_keycloak: false

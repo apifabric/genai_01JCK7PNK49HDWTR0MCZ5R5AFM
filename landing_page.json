@@ -1,0 +1,132 @@
+{
+    "name": "Wood Inventory Solutions",
+    "logo": {
+        "Type": "Logo",
+        "name": "logo.png",
+        "description": "A minimalistic logo depicting a stylized tree to represent sustainable wood sourcing."
+    },
+    "sections": [
+        {
+            "title": "Discover Premium Wood Supplies",
+            "subtitle": "Your Trusted Source for Quality Timber",
+            "name": "Hero",
+            "label": "Home",
+            "content": "Welcome to **Wood Inventory Solutions**, where quality meets reliability. Explore our diverse selection of sustainable timber, curated to meet the demands of woodworking professionals and enthusiasts alike. Begin your journey with us today!",
+            "order": 1,
+            "Type": "Hero",
+            "images": [
+                {
+                    "Type": "Hero",
+                    "name": "hero-banner.jpg",
+                    "description": "High-resolution image of premium timber stacks in a lush forest setting."
+                }
+            ]
+        },
+        {
+            "title": "About Us",
+            "subtitle": "Crafting Quality, Sustainably Sourced",
+            "name": "About",
+            "label": "About",
+            "content": "At **Wood Inventory Solutions**, we are dedicated to providing top-tier lumber while committing to environmental sustainability. With over 25 years in the industry, our mission is to bridge the gap between high-quality wood products and eco-conscious sourcing, so you can craft with confidence and care.",
+            "order": 2,
+            "Type": "About",
+            "images": [
+                {
+                    "Type": "Background",
+                    "name": "about-bg.jpg",
+                    "description": "Background image featuring a close-up of fine wood grains."
+                }
+            ]
+        },
+        {
+            "title": "Our Services",
+            "subtitle": "Comprehensive Timber Solutions for All Your Needs",
+            "name": "Services",
+            "label": "Services",
+            "content": "- **Custom Milling**: Tailored cuts to suit your specific project requirements.  \n- **Wholesale Options**: Competitive pricing for bulk orders.  \n- **Sustainable Logging Practices**: Ensuring minimal environmental impact.  \n- **Delivery & Logistics**: Reliable transport services to get your products where they need to be.",
+            "order": 3,
+            "Type": "Services",
+            "images": [
+                {
+                    "Type": "ItemListing",
+                    "name": "service-milling.jpg",
+                    "description": "Image of a milling machine in action with precise wood cuts."
+                }
+            ]
+        },
+        {
+            "title": "Gallery",
+            "subtitle": "Craftsmanship in Every Grain",
+            "name": "Gallery",
+            "label": "Gallery",
+            "content": "Explore our collection of stunning wood products ready to be transformed into masterpieces. Our gallery showcases the finest aspects of our timber selection, highlighting the versatility and beauty of natural wood.",
+            "order": 4,
+            "Type": "Gallery",
+            "images": [
+                {
+                    "Type": "Gallery",
+                    "name": "gallery-1.jpg",
+                    "description": "Beautiful finished wooden furniture pieces."
+                },
+                {
+                    "Type": "Gallery",
+                    "name": "gallery-2.jpg",
+                    "description": "Captivating wooden sculptures crafted from premium lumber."
+                }
+            ]
+        },
+        {
+            "title": "Testimonials",
+            "subtitle": "Hear from Our Satisfied Customers",
+            "name": "Testimonials",
+            "label": "Testimonials",
+            "content": "\"Wood Inventory Solutions provided exactly the selection of sustainable wood I needed for my craftwork. Their commitment to eco-friendly practices makes them my preferred supplier.\"  \n\u2014 *Sarah J., Furniture Designer*  \n\n\"Outstanding service and exceptional quality! Their wood literally transformed my construction projects.\"  \n\u2014 *Michael T., Contractor*",
+            "order": 5,
+            "Type": "Testimonials",
+            "images": [
+                {
+                    "Type": "Testimonial",
+                    "name": "testimonial-sarah.jpg",
+                    "description": "Photo of Sarah J., a happy furniture designer."
+                },
+                {
+                    "Type": "Testimonial",
+                    "name": "testimonial-michael.jpg",
+                    "description": "Photo of Michael T., a satisfied contractor."
+                }
+            ]
+        },
+        {
+            "title": "Contact Us",
+            "subtitle": "Get in Touch Today",
+            "name": "Contact",
+            "label": "Contact",
+            "content": "**We'd love to hear from you!** Whether you have a query about our products or need a specific service, reach us through the following methods:  \n- **Phone**: +1 (234) 567-8900  \n- **Email**: contact@woodinventorysolutions.com  \n- **Address**: 123 Timber Lane, Green Ville, USA  \n\nFill in [our contact form](#) to send us a message directly!",
+            "order": 6,
+            "Type": "Contact",
+            "images": [
+                {
+                    "Type": "Map",
+                    "name": "location-map.jpg",
+                    "description": "Map showing the headquarters' location in Green Ville, USA."
+                }
+            ]
+        },
+        {
+            "title": "Footer",
+            "subtitle": "",
+            "name": "Footer",
+            "label": "Footer",
+            "content": "\u00a9 2023 Wood Inventory Solutions. All rights reserved.  \n[Privacy Policy](#) | [Terms of Service](#) | [Sitemap](#)  \nFollow us on [Facebook](#), [Instagram](#), and [LinkedIn](#)",
+            "order": 7,
+            "Type": "Footer",
+            "images": [
+                {
+                    "Type": "Icon",
+                    "name": "social-icons.png",
+                    "description": "Icons of social media platforms like Facebook and Instagram."
+                }
+            ]
+        }
+    ]
+}
